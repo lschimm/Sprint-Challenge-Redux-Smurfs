@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import "./App.css";
 import { connect } from "react-redux";
+
+import "./App.css";
+import { fetchSmurfs, addSmurf } from "../actions";
 
 /*
  to wire this component up you're going to need a few things.
@@ -15,31 +17,71 @@ class App extends Component {
     height: ""
   };
 
+  render() {
+    return (
+      <div className="App">
+        <ul>
+          {this.props.smurfs.map(smurfHere => (
+            <div>
+              <h2>{smurfHere.name}</h2>
+              <p>
+                Age: {smurfHere.age}
+                Height: {smurfHere.height}
+              </p>
+            </div>
+          ))}
+        </ul>
+        <form>
+          <input
+            placeholder="Name"
+            type="text"
+            name="name"
+            value={this.state.name}
+            onChange={this.changeHandler}
+          />
+          <input
+            placeholder="Age"
+            type="text"
+            name="age"
+            value={this.state.age}
+            onChange={this.changeHandler}
+          />
+          <input
+            placeholder="Height"
+            type="text"
+            name="height"
+            value={this.state.height}
+            onChange={this.changeHandler}
+          />
+          <button onClick={this.submitHandler}>Add</button>
+        </form>
+      </div>
+    );
+  }
+
   componentDidMount() {
     this.props.fetchSmurfs();
   }
 
-  handleChange = e => {
+  changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  render() {
-    return (
-      <div className="App">
-        {this.props.smurfs.map(smurf => (
-          <li key={smurf.name} smurf={smurf}>
-            {smurf.name}
-            {smurf.age}
-            {smurf.height}
-          </li>
-        ))}
-        <h1>SMURFS! 2.0 W/ Redux</h1>
-        <div>Welcome to your Redux version of Smurfs!</div>
-        <div>Start inside of your `src/index.js` file!</div>
-        <div>Have fun!</div>
-      </div>
-    );
-  }
+  submitHandler = () => {
+    this.props.addSmurf(this.state);
+  };
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    addSmurf: state.addSmurf,
+    fetchSmursf: state.fetchSmurfs,
+    smurfs: state.smurfs,
+    error: fetchSmurfs.error
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchSmurfs, addSmurf }
+)(App);

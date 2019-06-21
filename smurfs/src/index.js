@@ -7,11 +7,11 @@ import { Provider } from "react-redux";
 
 import "./index.css";
 import App from "./components/App";
-import rootReducer from "./reducers";
+import { rootReducer } from "./reducers";
 
 // const store = createStore(
-//   () => {}, // this is the most basic reducer. A function that returns and object. Replace it.
-//   applyMiddleware()
+//   rootReducer => {}, // this is the most basic reducer. A function that returns and object. Replace it.
+//   applyMiddleware(thunk,logger)
 // );
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
