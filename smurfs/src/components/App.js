@@ -25,33 +25,32 @@ class App extends Component {
           <div className="smurf-layout">
             <h2>{smurfHere.name}</h2>
             <p>
-              Age: {smurfHere.age}
-              Height: {smurfHere.height}
+              Age: {smurfHere.age} Height: {smurfHere.height}
             </p>
           </div>
         ))}
         <div className="forms">
           <form>
             <input
+              name="name"
+              onChange={this.changeHandler}
               placeholder="Name"
               type="text"
-              name="name"
               value={this.state.name}
-              onChange={this.changeHandler}
             />
             <input
+              name="age"
+              onChange={this.changeHandler}
               placeholder="Age"
               type="text"
-              name="age"
               value={this.state.age}
-              onChange={this.changeHandler}
             />
             <input
+              name="height"
+              onChange={this.changeHandler}
               placeholder="Height"
               type="text"
-              name="height"
               value={this.state.height}
-              onChange={this.changeHandler}
             />
             <button onClick={this.submitHandler}>Add</button>
           </form>
