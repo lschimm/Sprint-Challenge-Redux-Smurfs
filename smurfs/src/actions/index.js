@@ -28,11 +28,17 @@ export const fetchSmurfs = () => dispatch => {
     .get("http://localhost:3333/smurfs")
     .then(res => {
       // console.log('error from axios:: res.fetch', res);
-      dispatch({ type: SMURFS_FETCH_SUCCESS, payload: res.data });
+      dispatch({
+        type: SMURFS_FETCH_SUCCESS,
+        payload: res.data
+      });
     })
     .catch(err => {
       // console.log('error from axios: err.fetch:', err);
-      dispatch({ type: SMURF_ERROR, payload: err });
+      dispatch({
+        type: SMURF_ERROR,
+        payload: err
+      });
     });
 };
 
@@ -41,9 +47,15 @@ export const addSmurf = newSmurf => dispatch => {
   axios
     .post("http://localhost:3333/smurfs", newSmurf)
     .then(res => {
-      dispatch({ type: SMURF_ADDED_SUCCESS, payload: res.data });
+      dispatch({
+        type: SMURF_ADDED_SUCCESS,
+        payload: res.data
+      });
     })
     .catch(err => {
-      dispatch({ type: SMURF_ERROR, payload: err });
+      dispatch({
+        type: SMURF_ERROR,
+        payload: err
+      });
     });
 };

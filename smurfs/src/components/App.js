@@ -20,41 +20,41 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <ul>
-          {this.props.smurfs.map(smurfHere => (
-            <div>
-              <h2>{smurfHere.name}</h2>
-              <p>
-                Age: {smurfHere.age}
-                Height: {smurfHere.height}
-              </p>
-            </div>
-          ))}
-        </ul>
-        <form>
-          <input
-            placeholder="Name"
-            type="text"
-            name="name"
-            value={this.state.name}
-            onChange={this.changeHandler}
-          />
-          <input
-            placeholder="Age"
-            type="text"
-            name="age"
-            value={this.state.age}
-            onChange={this.changeHandler}
-          />
-          <input
-            placeholder="Height"
-            type="text"
-            name="height"
-            value={this.state.height}
-            onChange={this.changeHandler}
-          />
-          <button onClick={this.submitHandler}>Add</button>
-        </form>
+        {this.props.smurfs.map(smurfHere => (
+          <div className="smurf-layout">
+            <h2>{smurfHere.name}</h2>
+            <p>
+              Age: {smurfHere.age}
+              Height: {smurfHere.height}
+            </p>
+          </div>
+        ))}
+        <div className="forms">
+          <form>
+            <input
+              placeholder="Name"
+              type="text"
+              name="name"
+              value={this.state.name}
+              onChange={this.changeHandler}
+            />
+            <input
+              placeholder="Age"
+              type="text"
+              name="age"
+              value={this.state.age}
+              onChange={this.changeHandler}
+            />
+            <input
+              placeholder="Height"
+              type="text"
+              name="height"
+              value={this.state.height}
+              onChange={this.changeHandler}
+            />
+            <button onClick={this.submitHandler}>Add</button>
+          </form>
+        </div>
       </div>
     );
   }
@@ -63,8 +63,8 @@ class App extends Component {
     this.props.fetchSmurfs();
   }
 
-  changeHandler = e => {
-    this.setState({ [e.target.name]: e.target.value });
+  changeHandler = event => {
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   submitHandler = () => {
@@ -75,9 +75,10 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     addSmurf: state.addSmurf,
-    fetchSmursf: state.fetchSmurfs,
+    fetchSmurfs: state.fetchSmurfs,
     smurfs: state.smurfs,
     error: fetchSmurfs.error
+    // ???
   };
 };
 
